@@ -42,7 +42,7 @@ public class HomeWork_1 {
         sEllipse_1 = 15 * 100; // 15 дм2 приводим сразу к см2
         sEllipse_2 = 600; // см2
 
-        System.out.println("Площадь овального кольца = " + (sEllipse_1 - sEllipse_2));
+        System.out.println("Площадь овального кольца = " + (sEllipse_1 - sEllipse_2) + "см2");
 
         /*Задача 4
          * @author Ilya Elizarov
@@ -86,5 +86,39 @@ public class HomeWork_1 {
         }
         else System.out.println("Корней нет ");
 
+
+        /*Задача 6
+         * @author Ilya Elizarov
+         * */
+
+        System.out.println("\n Задача 6 \n");
+        Scanner sc6 = new Scanner(System.in);
+        System.out.println("Введите натуральное трехзначное число :");
+        long nat = sc6.nextLong();
+//        long a = 789L;
+        if (nat<=0)
+            System.out.println("Вы ввели не натуральное число ");
+        long hundreds = nat / 100; //сотни
+        long tens = (nat / 10) % 10; // десятки
+        long units = nat % 10; // единицы
+//        System.out.println(" Число сотен = " + hundreds);
+//        System.out.println(" Число десятков = " + tens);
+//        System.out.println(" число единиц = " + units);
+        if(nat>0) {
+            if (hundreds == tens && units == tens) {
+                System.out.println("В числе " + nat + " наибольшая цифра = " + hundreds);
+            }
+            if (hundreds > tens && hundreds > units) {
+                System.out.println("В числе " + nat + " наибольшая цифра = " + hundreds);
+            }
+
+            if (tens > hundreds && tens > units) {
+                System.out.println("В числе " + nat + " наибольшая цифра = " + tens);
+            }
+            if (units > hundreds && units > tens)
+                System.out.println("В числе " + nat + " наибольшая цифра = " + units);
+        }
+
     }
 }
+
