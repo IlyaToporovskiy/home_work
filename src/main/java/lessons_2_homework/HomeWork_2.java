@@ -1,5 +1,7 @@
 package lessons_2_homework;
 
+import java.util.Scanner;
+
 public class HomeWork_2 {
   public static void main(String[] args) {
 
@@ -57,7 +59,15 @@ public class HomeWork_2 {
 
 //       //Задача 4  проверить является ли натуральное число простым
     System.out.println("\n Задача 4 \n");
-
-
+    Scanner sc4 = new Scanner(System.in);
+    System.out.println("Введите число  :");
+    int num4 =sc4.nextInt();
+    for(int i=1;i<num4;i++){
+      if(num4%i==0){
+        System.out.println("Число не относится к простым числам");
+      }else{
+        System.out.println("Число "+num4+" относится к простым числам");
+      }
+    }
   }
 }
