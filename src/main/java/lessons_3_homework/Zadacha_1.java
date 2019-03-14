@@ -6,11 +6,11 @@ public class Zadacha_1 {
     public static void main(String[] args) {
         System.out.println("Задача 1 ");
         int count=0;
-        for(int i=1,j=0 ; j<=20;i++){
+        for(int i=1,j=0 ; j<20;i++){
             j=2*i;
             count++;
         }
-        count--;
+
         System.out.println("Длина массива = "+count);
         int [] arr1 =new int [count];
         for(int i=0;i<(arr1.length);i++){
