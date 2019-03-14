@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class Zadacha_3 {
     public static void main(String[] args) {
+
+        System.out.println("Задача 3 ");
         int num=15,count=0;
         Random random =new Random();
         int [] arr1 =new int[num];
