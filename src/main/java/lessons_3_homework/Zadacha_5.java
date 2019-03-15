@@ -5,20 +5,37 @@ import java.util.Scanner;
 public class Zadacha_5 {
   public static void main(String[] args) {
     //Выполнения циклов
+
+    Scanner sc1 = new Scanner(System.in);
     System.out.println("Введите строку : ");
-    Scanner sc1 =new Scanner(System.in);
-    String a = sc1.next();
+    String a = sc1.nextLine();
+
     System.out.println("Введите подстроку для замены : ");
-    Scanner sc2 =new Scanner(System.in);
-    String b =sc2.next();
-    System.out.println("Введите чем хотите заменить подстроку");
-    Scanner sc3 =new Scanner(System.in);
-    String c =sc2.next();
+    String b = sc1.nextLine();
 
-    String d;
-
-
-    d=a.replace(b,c);
+    System.out.println("Введите чем хотите заменить подстроку ");
+    String c = sc1.nextLine();
+    String d =a.replaceAll(b,c);
     System.out.println(d);
+
+    String s = d;
+    String s2 = "";
+    for (int i = 0; i < s.length(); i++) {
+      Boolean found = false;
+      for (int j = 0; j < s2.length(); j++) {
+        if (s.charAt(i) == s2.charAt(j)) {
+          found = true;
+          break; //
+        }
+      }
+      if (found == false) {
+        s2 = s2.concat(String.valueOf(s.charAt(i)));
+      }
+    }
+    System.out.println(s2.replaceAll(" ",""));
+
+
+
+
   }
 }
