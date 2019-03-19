@@ -5,20 +5,26 @@ public class Main {
 
 
         List list_1 = new List();
-        list_1.addFront(1);
-        list_1.addFront(2);
-        list_1.addFront(3);
-        list_1.addFront(34);
+        list_1.addElementBack(5);
+        list_1.addElementBack(10);
+        list_1.addElementBack(45);
+        list_1.addElementBack(44);
+        list_1.addElementBack(42);
+        list_1.addElementBack(44);
+        list_1.addElementBack(46);
+//
+        list_1.addElementForward(87);
+        list_1.addElementForward(14);
+        list_1.addElementForward(3);
+        list_1.removeBack();
+        list_1.removeItemAll(10);
+
+        list_1.show();
 
 
-        list_1.addBack(4);
-        list_1.addBack(5);
-        list_1.addBack(6);
-        list_1.addBack(79);
-        list_1.addBack(84);
+//        list_1.addFront(1);
 
-
-        list_1.delEl(5);
-        list_1.printList();
+////
+//        list_1.printList();
     }
 }
