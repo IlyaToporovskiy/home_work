@@ -1,6 +1,6 @@
 package kontrolnaya;
 
-public class Doctor implements InterfaceDoctor{
+public class Doctor extends User implements InterfaceDoctor{
     String name;
 
 
