@@ -58,10 +58,15 @@ public static void groupForWords(Map<String, Integer> ob){
             count=s.length();
         }
     }
-    System.out.println(count);
-    for (int i=1;i<=count;i++){
-        if()
-        List<String> stringList =new ArrayList<>();
+    System.out.println(count); //длина слова
+
+    for (String s : ob.keySet()) {
+
+        if(s.length()==2){
+            List<String> list=new ArrayList<>();
+            list.add(s);
+            System.out.println(list);
+        }
 
     }
 
