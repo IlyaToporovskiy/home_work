@@ -1,5 +1,6 @@
 package fitness;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -14,7 +15,7 @@ public class FitnessRegistrator {
     // либо
     private HashMap<String, HashSet> clients = new HashMap<>();
 
-    public void addFor(Human human, FitnessServiceEnumeration type) throws NoAccessException, QueueException {
+    public void addFor(Human human, FitnessServiceEnumeration type) throws NoAccessException, QueueException, IOException {
         if (isAccessEnable(human, type)==false) {
             throw new NoAccessException("Нет доступа в это время");
         }
@@ -25,6 +26,7 @@ public class FitnessRegistrator {
                     throw new QueueException("лимит на " + CLIENT);
                 }
                 inGroup.add(human);
+                FitnessLogger.writeLog(human,type);
 
                 break;
             case POOL:
@@ -33,6 +35,7 @@ public class FitnessRegistrator {
                     throw new QueueException("лимит на " + CLIENT);
                 }
                 inPool.add(human);
+                FitnessLogger.writeLog(human,type);
                 break;
             case GYM:
                 containErr(inGym, human);
@@ -40,6 +43,7 @@ public class FitnessRegistrator {
                     throw new QueueException("лимит на " + CLIENT);
                 }
                 inGym.add(human);
+                FitnessLogger.writeLog(human,type);
                 break;
         }
 
@@ -122,7 +126,7 @@ Comparator<Human> comparator =new Comparator<Human>() {
                 '}';
     }
 
-    public static void main(String[] args) throws NoAccessException, QueueException {
+    public static void main(String[] args) throws NoAccessException, QueueException, IOException {
         FitnessRegistrator f = new FitnessRegistrator();
         DayClient dayClient1=new DayClient("1", "11", 1990);
         DayClient dayClient2=new DayClient("2", "12", 1990);
