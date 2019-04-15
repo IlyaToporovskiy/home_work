@@ -65,7 +65,7 @@ public class Human {
 
     @Override
     public String toString() {
-        return  ", surname='" + surname + '\'' +
+        return  " surname='" + surname + '\'' +
                 "name='" + name + '\'' +
                 ", bYear=" + bYear +
                 ", regDate='" + regDate + '\'' +

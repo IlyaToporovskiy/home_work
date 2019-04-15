@@ -1,6 +1,8 @@
 package fitness;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 @AccessMode(gym = "16", group = "16", pool = "0")
@@ -40,7 +42,7 @@ public class DayClient extends Human{
         dateNow.setYear(dateNow.getYear()+1);
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
         String s= formatForDateNow.format(dateNow);
-        System.out.println("Текущая дата " + formatForDateNow.format(dateNow));
+//        System.out.println("Текущая дата " + formatForDateNow.format(dateNow));
         return s;
     }
     public String setEndOfRegMonth(int monthEnd){
@@ -48,8 +50,19 @@ public class DayClient extends Human{
         dateNow.setMonth(dateNow.getMonth()+monthEnd);
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
         String s= formatForDateNow.format(dateNow);
-        System.out.println("Текущая дата " + formatForDateNow.format(dateNow));
+//        System.out.println("Текущая дата " + formatForDateNow.format(dateNow));
         return s;
     }
 
+    @Override
+    public String toString() {
+        Class<FitnessRegistrator> fitnessRegistratorClass =FitnessRegistrator.class;
+        Field[] fields =fitnessRegistratorClass.getFields();
+        System.out.println(Arrays.toString(fields));
+        return "DayClient{" +
+                "surname='" + getSurname() + '\'' +
+                "name='" + name + '\'' +
+                "тип клиента="+
+                '}';
+    }
 }

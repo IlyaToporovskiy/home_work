@@ -15,7 +15,7 @@ public class FitnessRegistrator {
     private HashMap<String, HashSet> clients = new HashMap<>();
 
     public void addFor(Human human, FitnessServiceEnumeration type) throws NoAccessException, QueueException {
-        if (isAccessEnable(human, type)/*==false*/) {
+        if (isAccessEnable(human, type)==false) {
             throw new NoAccessException("Нет доступа в это время");
         }
         switch (type) {
@@ -82,10 +82,16 @@ public class FitnessRegistrator {
             inGroup.sort(comparator);
             inPool.sort(comparator);
             inGym.sort(comparator);
-//        System.out.println(inGym.toString()+inPool.toString()+inGroup.toString());
 
-        System.out.println("Sort "+inGym.toString()+inPool.toString()+inGroup.toString());
-        ;
+        ArrayList<ArrayList<Human>> humanArrayList =new ArrayList<>(2);
+        humanArrayList.add(inGym);
+        humanArrayList.add(inPool);
+        humanArrayList.add(inGroup);
+
+
+        for (ArrayList<Human> humans : humanArrayList) {
+            System.out.println(humans);
+        }
 
 //<фамилия> <имя> <тип клиента> <место нахождения>
 
@@ -132,8 +138,8 @@ Comparator<Human> comparator =new Comparator<Human>() {
         f.addFor(dayClient5, FitnessServiceEnumeration.GROUP);
         f.addFor(dayClient4, FitnessServiceEnumeration.GROUP);
 //        f.removeAll(dayClient);
-
-//        System.out.println(f);
+        f.sortClients();
+//        System.out.println(f.sortClients());
 
 
     }
