@@ -56,13 +56,10 @@ public class DayClient extends Human{
 
     @Override
     public String toString() {
-        Class<FitnessRegistrator> fitnessRegistratorClass =FitnessRegistrator.class;
-        Field[] fields =fitnessRegistratorClass.getFields();
-        System.out.println(Arrays.toString(fields));
         return "DayClient{" +
-                "surname='" + getSurname() + '\'' +
-                "name='" + name + '\'' +
-                "тип клиента="+
+                "endOfReg='" + endOfReg + '\'' +
+                ", group=" + group +
+                ", gym=" + gym +
                 '}';
     }
 }

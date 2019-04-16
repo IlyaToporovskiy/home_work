@@ -16,9 +16,10 @@ public class FitnessRegistrator {
     private HashMap<String, HashSet> clients = new HashMap<>();
 
     public void addFor(Human human, FitnessServiceEnumeration type) throws NoAccessException, QueueException, IOException {
-        if (isAccessEnable(human, type)==false) {
-            throw new NoAccessException("Нет доступа в это время");
-        }
+//        //проверка времени, если поздно то нужно закоммитить 2 строчки ниже
+//        if (isAccessEnable(human, type)==false) {
+//            throw new NoAccessException("Нет доступа в это время");
+//        }
         switch (type) {
             case GROUP:
                 containErr(inGroup, human);
@@ -87,16 +88,15 @@ public class FitnessRegistrator {
             inPool.sort(comparator);
             inGym.sort(comparator);
 
-        ArrayList<ArrayList<Human>> humanArrayList =new ArrayList<>(2);
-        humanArrayList.add(inGym);
-        humanArrayList.add(inPool);
-        humanArrayList.add(inGroup);
-
-
-        for (ArrayList<Human> humans : humanArrayList) {
-            System.out.println(humans);
+        for (Human human : inGym) {
+            System.out.println(human.getSurname() + " " + human.getName() + "    " + human.getClass().getSimpleName() + " - GYM");
         }
-
+        for (Human human : inPool) {
+            System.out.println(human.getSurname() + " " + human.getName() + "    " + human.getClass().getSimpleName() + " - POOL");
+        }
+        for (Human human : inGroup) {
+            System.out.println(human.getSurname() + " " + human.getName() + "    " + human.getClass().getSimpleName() + " - GROUP");
+        }
 //<фамилия> <имя> <тип клиента> <место нахождения>
 
 
@@ -126,26 +126,6 @@ Comparator<Human> comparator =new Comparator<Human>() {
                 '}';
     }
 
-    public static void main(String[] args) throws NoAccessException, QueueException, IOException {
-        FitnessRegistrator f = new FitnessRegistrator();
-        DayClient dayClient1=new DayClient("1", "11", 1990);
-        DayClient dayClient2=new DayClient("2", "12", 1990);
-        DayClient dayClient3=new DayClient("3", "13", 1990);
-        DayClient dayClient4=new DayClient("4", "14", 1990);
-        DayClient dayClient5=new DayClient("5", "15", 1990);
-        DayClient dayClient6=new DayClient("6", "16", 1990);
-        f.addFor(dayClient3, FitnessServiceEnumeration.GROUP);
-        f.addFor(dayClient2, FitnessServiceEnumeration.GROUP);
-        f.addFor(dayClient1, FitnessServiceEnumeration.GROUP);
 
-        f.addFor(dayClient6, FitnessServiceEnumeration.GROUP);
-        f.addFor(dayClient5, FitnessServiceEnumeration.GROUP);
-        f.addFor(dayClient4, FitnessServiceEnumeration.GROUP);
-//        f.removeAll(dayClient);
-        f.sortClients();
-//        System.out.println(f.sortClients());
-
-
-    }
 
 }
