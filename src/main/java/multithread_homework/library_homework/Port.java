@@ -1,9 +1,6 @@
 package multithread_homework.library_homework;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.*;
 
 //Порт. Корабли заходят в порт для разгрузки/загрузки.
 // Работает несколько причалов. У одного причала может стоять один корабль.
@@ -11,31 +8,76 @@ import java.util.concurrent.SynchronousQueue;
 public class Port {
 
     public static void main(String[] args) {
-        int numberPrichal =3;
-        int numberShip =15;
-
-
-        ArrayBlockingQueue<SynchronousQueue<Integer>> portPrichal =new ArrayBlockingQueue(numberPrichal);
-
-
-        ExecutorService executorService = Executors.newFixedThreadPool(numberShip);
-        executorService.execute(new Ship(portPrichal));
+        Semaphore semaphore = new Semaphore(3);
+        new Ship(semaphore, "корабль 1");
+        new Ship(semaphore, "корабль 2");
+        new Ship(semaphore, "корабль 3");
+        new Ship(semaphore, "корабль 4");
     }
 }
 
+class Prichal {
+    static int count = 3; //количество причалов
+}
 
-class Ship implements Runnable{
-    ArrayBlockingQueue<SynchronousQueue<Integer>> portPrichal;
+class Ship implements Runnable {
+    Semaphore semaphore;
+    String name;
 
-
-    public Ship(ArrayBlockingQueue<SynchronousQueue<Integer>> portPrich) {
-        this.portPrichal = portPrich;
+    public Ship(Semaphore semaphore, String name) {
+        this.semaphore = semaphore;
+        this.name = name;
+        new Thread(this).start();
     }
 
     @Override
     public void run() {
-        while (portPrichal.isEmpty()){
-
+        while (Prichal.count == 0) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+        System.out.println("Начало работы потока " + name);
+        try {
+            System.out.println("Ожидание разрешения " + name);
+            semaphore.acquire();//переключили семафор
+            System.out.println("Разрешение получил");
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        unloading();
+//        downloading();
+        semaphore.release();
+        System.out.println("потоку не нужен релиз");
     }
+
+    public void unloading() { //разгрузка
+        Prichal.count--;
+        System.out.println("Идет разгрузка");
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("разгрузка завершена " +name);
+        Prichal.count++;
+
+    }
+
+    public void downloading() { //загрузка
+        Prichal.count--;
+        System.out.println("Идет загрузка");
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("загрузка завершена " + name);
+        Prichal.count++;
+
+    }
+
 }
